@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-   $book = Book::find(1);
-   return $book->load('reviews');
+
+  return  Book::popular()->get();
 });
+
