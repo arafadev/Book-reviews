@@ -37,9 +37,15 @@ class Book extends Model
         ], 'rating')
             ->orderBy('reviews_avg_rating', 'desc');
     }
+
+    // this code indepent using relationship ('reviews')
     public function scopeMinReviews(Builder $query, int $minReviews): Builder|QueryBuilder
     {
         return $query->having('reviews_count', '>=', $minReviews);
+    }
+    public function scopeMaxReviews(Builder $query, int $maxReviews): Builder|QueryBuilder
+    {
+        return $query->having('reviews_count', '<=', $maxReviews);
     }
 
     private function dateRangeFilter(Builder $query, $from = null, $to = null)
